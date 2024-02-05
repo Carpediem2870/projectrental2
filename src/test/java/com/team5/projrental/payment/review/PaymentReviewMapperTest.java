@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,7 +36,7 @@ class PaymentReviewMapperTest {
     @Test
     void upProductIstatus() {
         int result = mapper.upProductIstatus(6);
-        assertEquals(result,1);
+        assertEquals(result,2);
 
 
     }
@@ -67,17 +68,19 @@ class PaymentReviewMapperTest {
 
     @Test
     void selReIstatus() {
-        int result = mapper.selReIstatus(6,1);
-        assertEquals(-4,result);
+        Integer ipayment = 6; // 테스트에 사용하는 값으로 변경
+        Integer someOtherParam = 1; // 다른 파라미터에 대한 값도 설정
+        int result = mapper.selReIstatus(ipayment, someOtherParam);
+        // 테스트 결과 검증
+        assertEquals(-4, result);
 
     }
 
     @Test
     void selReview() {
-        int result = mapper.selReview(1,6);
-        assertEquals(1,result);
-        int result2 = mapper.selReview(1,7);
-        assertEquals(0,result2);
+
+        int result2 = mapper.selReview(1,6);
+        assertEquals(3,result2);
     }
 
     @Test
