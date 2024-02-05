@@ -40,7 +40,7 @@ import org.springframework.util.MultiValueMap;
 @SpringBootTest
 @MockMvcConfig
 @Import(PaymentReviewController.class)
-class PaymentReviewControllerTest {
+public class PaymentReviewControllerTest {
     @Autowired
     private MockMvc mvc;
 
@@ -55,7 +55,7 @@ class PaymentReviewControllerTest {
         RivewDto dto = new RivewDto();
         dto.setIuser(4);
         dto.setContents("리뷰테스트");
-        dto.setIpayment(13);
+        dto.setIpayment(10);
         dto.setRating(5);
 
         given(service.postReview(any())).willReturn(1);
