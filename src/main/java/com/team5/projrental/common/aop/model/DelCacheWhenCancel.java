@@ -6,6 +6,6 @@ import lombok.Data;
 public class DelCacheWhenCancel {
 
     private Integer iproduct;
-    private Integer status;
+    private Integer istatus;
 
 }

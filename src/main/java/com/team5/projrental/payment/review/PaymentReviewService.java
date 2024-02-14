@@ -36,9 +36,9 @@ public class PaymentReviewService {
         Integer istatus = reviewMapper.selReIstatus(dto.getIpayment(), loginUserPk);
         if (istatus == -4) {
             //로그인한 유저가 리뷰를 적었던건지 확인하는것
-            int selReview = reviewMapper.selReview(loginUserPk, dto.getIpayment());
+            int selReview = reviewMapper.selReview( dto.getIpayment(),loginUserPk);
             if (selReview == 0) {
-                CheckIsBuyer buyCheck = reviewMapper.selBuyRew(loginUserPk, dto.getIpayment());
+                CheckIsBuyer buyCheck = reviewMapper.selBuyRew(dto.getIpayment(),loginUserPk);
                 CommonUtils.ifAnyNullThrow(BadInformationException.class, BAD_INFO_EX_MESSAGE, buyCheck);
                 if (buyCheck.getIsBuyer() == 0) {
                     dto.setContents("");
@@ -95,7 +95,7 @@ public class PaymentReviewService {
             throw new BadInformationException(BAD_INFO_EX_MESSAGE);
         }
 
-        CheckIsBuyer buyCheck = reviewMapper.selBuyRew(loginUserPk, check.getIpayment());
+        CheckIsBuyer buyCheck = reviewMapper.selBuyRew(check.getIpayment(),loginUserPk);
         if (buyCheck.getIsBuyer() == 1) {
             //수정전 리뷰를 작성한 사람이 iuser가 맞는지 확인
             if (check.getIuser() == loginUserPk) {
@@ -130,7 +130,7 @@ public class PaymentReviewService {
         }
         if (check.getIuser() == loginUserPk) {
             //리뷰를 등록한 사람이 판매자일 경우 삭제불가능 처리
-            CheckIsBuyer buyCheck = reviewMapper.selBuyRew(loginUserPk, check.getIpayment());
+            CheckIsBuyer buyCheck = reviewMapper.selBuyRew(check.getIpayment(), loginUserPk);
             CommonUtils.ifAnyNullThrow(BadInformationException.class, BAD_INFO_EX_MESSAGE, buyCheck);
             if (buyCheck.getIsBuyer() == 0) {
                 throw new BadInformationException(ILLEGAL_EX_MESSAGE);

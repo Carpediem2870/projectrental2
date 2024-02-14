@@ -140,9 +140,11 @@ public class CommonAspect {
         }
         List<DelCacheWhenCancel> delCacheWhenCancel = productRepository.checkStatusBothAndGetIproduct(ipayment);
         if (delCacheWhenCancel.size() == 2) {
-            if (delCacheWhenCancel.get(0).getStatus().equals(delCacheWhenCancel.get(1).getStatus()) &&
-                    delCacheWhenCancel.get(0).getStatus().equals(status)) {
-                disabledCache.remove(delCacheWhenCancel.get(0).getIproduct());
+            if (delCacheWhenCancel.get(0).getIstatus().equals(delCacheWhenCancel.get(1).getIstatus()) &&
+                    delCacheWhenCancel.get(0).getIstatus().equals(status)) {
+                if(disabledCache.get(delCacheWhenCancel.get(0).getIproduct()) != null) {
+                    disabledCache.remove(delCacheWhenCancel.get(0).getIproduct());
+                }
             }
         }
     }
