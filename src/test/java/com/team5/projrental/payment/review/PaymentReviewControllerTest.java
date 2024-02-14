@@ -7,12 +7,16 @@ import com.team5.projrental.common.model.ResVo;
 import com.team5.projrental.payment.review.model.DelRivewDto;
 import com.team5.projrental.payment.review.model.RivewDto;
 import com.team5.projrental.payment.review.model.UpRieDto;
+import com.team5.projrental.user.model.SigninDto;
+import com.team5.projrental.user.model.SigninVo;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.util.LinkedMultiValueMap;
@@ -38,6 +42,7 @@ class PaymentReviewControllerTest {
     @Autowired
     private ObjectMapper mapper;
 
+    @WithMockUser
     @Test
     void postReview() throws Exception {
         RivewDto dto = new RivewDto();
@@ -56,7 +61,7 @@ class PaymentReviewControllerTest {
                 .andExpect(content().json("{\"result\":1}"));
     }
 
-
+    @WithMockUser
     @Test
     void patchReview() throws Exception {
         UpRieDto dto = new UpRieDto();
@@ -76,6 +81,7 @@ class PaymentReviewControllerTest {
     }
 
     @Test
+    @WithMockUser
     void delReview() throws Exception {
         ResVo vo = new ResVo(Const.SUCCESS);
         MultiValueMap<String, String> requestParams = new LinkedMultiValueMap();

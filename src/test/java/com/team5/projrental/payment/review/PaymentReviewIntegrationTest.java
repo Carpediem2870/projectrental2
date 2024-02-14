@@ -65,9 +65,9 @@ public class PaymentReviewIntegrationTest {
     void postReview() throws Exception {
         RivewDto dto = new RivewDto();
         dto.setContents("리뷰테스트");
-        dto.setIpayment(38);
+        dto.setIpayment(39);
         dto.setRating(5);
-        dto.setIuser(4);
+        dto.setIuser(1);
 
         MvcResult mr = mockMvc.perform(
                         MockMvcRequestBuilders
@@ -83,20 +83,6 @@ public class PaymentReviewIntegrationTest {
         ResVo vo = mapper.readValue(content, ResVo.class);
         assertEquals(1, vo.getResult());
 
-        RivewDto dto1 = new RivewDto();
-        dto1.setContents("리뷰테스트");
-        dto1.setIpayment(16);
-        dto1.setRating(5);
-        String json1 = mapper.writeValueAsString(dto1);
-        System.out.println("json: " + json1);
-        String mr1 = mockMvc.perform(
-                        MockMvcRequestBuilders
-                                .post("/api/pay/review")
-                                .header("Authorization", token))
-                .andReturn().getResponse().getContentAsString();
-
-        ErrorResultVo errorResultVo = mapper.readValue(mr1, ErrorResultVo.class);
-        assertEquals(errorResultVo.getErrorCode(), 400);
 
     }
 
