@@ -32,6 +32,7 @@ public class ProductListVo {
     private Integer inventory;
     private Integer isLiked;
     private Integer view;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Categories categories;
 
     public ProductListVo(GetProductListResultDto dto) {
@@ -54,6 +55,27 @@ public class ProductListVo {
         this.view = dto.getView();
         this.isLiked = dto.getIsLiked();
         this.categories = dto.getIcategory();
+    }
+
+    protected ProductListVo(GetProductListResultDto dto, boolean flag) {
+        this.iuser = dto.getIuser();
+        this.nick = dto.getNick();
+        this.iauth = dto.getIauth();
+        this.iproduct = dto.getIproduct();
+        this.title = dto.getTitle();
+        this.price = dto.getPrice();
+        this.deposit = dto.getDeposit();
+        this.rentalPrice = dto.getRentalPrice();
+        this.rentalStartDate = dto.getRentalStartDate();
+        this.rentalEndDate = dto.getRentalEndDate();
+        this.addr = dto.getAddr();
+        this.restAddr = dto.getRestAddr();
+        this.prodLike = dto.getProdLike();
+        this.userPic = dto.getUserStoredPic();
+        this.prodMainPic = dto.getProdMainStoredPic();
+        this.istatus = dto.getIstatus();
+        this.view = dto.getView();
+        this.isLiked = dto.getIsLiked();
     }
 
     public ProductListVo(GetProductResultDto dto) {
